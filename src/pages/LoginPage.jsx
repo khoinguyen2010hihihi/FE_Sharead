@@ -14,6 +14,7 @@ function LoginPage() {
 
   return (
     <div className="login-container">
+      <img className='login__img' src="../../public/login_img.jpg" alt="" />
       <div className="login-form">
         <h2 className="login-title">Welcome Back</h2>
         <form onSubmit={handleSubmit}>
@@ -48,7 +49,6 @@ function LoginPage() {
           </button>
         </form>
       </div>
-      <img className='login__img' src="../../public/login_img.jpg" alt="" />
     </div>
   );
 }

@@ -1,33 +1,33 @@
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #e68905 0%, #fbff25 100%);
+  background: linear-gradient(135deg, #1f0de6 0%, #9a02b8 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.login-form {
+.register-form {
   background: white;
   padding: 2.5rem;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   width: 250px;
   height: 500px;
   max-width: 1000px;
-  /* margin: 1rem 0 1rem 1rem; */
+  margin: 1rem 0 1rem 1rem;
 }
 
-.login__img {
+.register__img {
   width: 500px;
   height: 580px;
   object-fit: cover;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
-.login-title {
+.register-title {
   text-align: center;
   margin-bottom: 2rem;
   color: #333;
@@ -47,7 +47,7 @@
   font-size: 0.9rem;
 }
 
-.input-field {
+.input-field__register {
   width: 100%;
   padding: 0.875rem;
   border: 2px solid #e1e5e9;
@@ -57,20 +57,20 @@
   box-sizing: border-box;
 }
 
-.input-field:focus {
+.input-field__register:focus {
   outline: none;
-  border-color: #d8c80d;
-  box-shadow: 0 0 0 1px rgb(255, 209, 25);
+  border-color: rgb(185, 14, 242);
+  box-shadow: 0 0 0 1px rgb(185, 14, 242);
 }
 
-.input-field::placeholder {
+.input-field__register::placeholder {
   color: #aaa;
 }
 
-.login-button {
+.register-button {
   width: 100%;
   padding: 0.875rem;
-  background: linear-gradient(135deg, #fffb09 0%, #ff6804 100%);
+  background: linear-gradient(135deg, #f619f6 0%, #5e6bf6 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -78,26 +78,26 @@
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 100px;
+  margin-top: 0.5rem;
 }
 
-.login-button:hover {
+.register-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgb(169, 244, 8);
+  box-shadow: 0 8px 25px rgb(127, 22, 143);
 }
 
-.login-button:active {
+.register-button:active {
   transform: translateY(0);
 }
 
 /* Responsive design */
 @media (max-width: 480px) {
-  .login-form {
+  .register-form {
     padding: 2rem;
     margin: 0.5rem;
   }
   
-  .login-title {
+  .register-title {
     font-size: 1.6rem;
   }
 }
