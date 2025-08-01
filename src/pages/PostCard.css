@@ -1,0 +1,141 @@
+.post-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.post-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-author-info {
+  flex: 1;
+}
+
+.post-author-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.post-timestamp {
+  color: #657786;
+  font-size: 0.9rem;
+}
+
+.post-content {
+  margin-bottom: 15px;
+}
+
+.post-content p {
+  margin: 0;
+  line-height: 1.5;
+  color: #333;
+  font-size: 1rem;
+}
+
+.post-image-container {
+  margin-top: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-stats {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e8ed;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #657786;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #657786;
+  transition: all 0.2s ease;
+  flex: 1;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: #f7f9fa;
+}
+
+.like-btn:hover {
+  color: #e74c3c;
+  background: #fdf2f2;
+}
+
+.like-btn.liked {
+  color: #e74c3c;
+}
+
+.comment-btn:hover {
+  color: #1da1f2;
+  background: #e8f5fe;
+}
+
+.share-btn:hover {
+  color: #17bf63;
+  background: #e8f5e8;
+}
+
+@media (max-width: 768px) {
+  .post-card {
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .post-stats {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .action-btn {
+    padding: 10px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .action-btn span {
+    display: none;
+  }
+}
