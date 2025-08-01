@@ -48,6 +48,7 @@ function LoginPage() {
           </button>
         </form>
       </div>
+      <img className='login__img' src="../../public/login_img.jpg" alt="" />
     </div>
   );
 }

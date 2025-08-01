@@ -3,18 +3,28 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e68905 0%, #fbff25 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-form {
   background: white;
   padding: 2.5rem;
-  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem;
+  width: 250px;
+  height: 500px;
+  max-width: 1000px;
+  margin: 1rem 0 1rem 1rem;
+}
+
+.login__img {
+  width: 500px;
+  height: 580px;
+  object-fit: cover;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .login-title {
@@ -49,8 +59,8 @@
 
 .input-field:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #d8c80d;
+  box-shadow: 0 0 0 3px rgb(255, 209, 25);
 }
 
 .input-field::placeholder {
@@ -60,7 +70,7 @@
 .login-button {
   width: 100%;
   padding: 0.875rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #fffb09 0%, #ff6804 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -73,7 +83,7 @@
 
 .login-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 25px rgb(169, 244, 8);
 }
 
 .login-button:active {
