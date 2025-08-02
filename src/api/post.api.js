@@ -1,4 +1,3 @@
-// src/api/post.api.js
 import api from "../utils/axios";
 
 export const getPosts = () => api.get('/post');
