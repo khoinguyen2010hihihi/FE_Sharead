@@ -1,3 +1,4 @@
-import api from "../utils/axios";
+import api from "../utils/axios"
+import { unwrap } from "../utils/unwrapper.js"
 
-export const toggleLike = commentId => api.post(`/comment-like/${commentId}`)
+export const toggleCommentLike = commentId => unwrap(api.post(`/comment-like/${commentId}`))

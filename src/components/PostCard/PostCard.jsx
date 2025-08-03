@@ -27,8 +27,8 @@ const PostCard = ({ post }) => {
 
     if (!showComments) {
       try {
-        const res = await getCommentsByPost(post._id)
-        setComments(res.data.metadata)
+        const data = await getCommentsByPost(post._id)
+        setComments(data)
       } catch (error) {
         console.error('Failed to fetch comments:', error)
       }
@@ -40,8 +40,8 @@ const PostCard = ({ post }) => {
     if (!newComment.trim()) return
 
     try {
-      const res = await createComment(post._id, newComment)
-      setComments(prev => [res.data.metadata, ...prev])
+      const comment = await createComment(post._id, newComment)
+      setComments(prev => [comment, ...prev])
       setNewComment('')
     } catch (error) {
       console.error('Failed to create comment:', error)

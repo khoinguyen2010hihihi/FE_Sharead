@@ -1,6 +1,7 @@
 import api from "../utils/axios"
+import { unwrap } from "../utils/unwrapper.js"
 
-export const createComment = (postId, content) => api.post(`/comment/${postId}`, {content})
-export const getCommentsByPost = (postId) => api.get(`/comment/${postId}`)
-export const deleteComment = (commentId) => api.delete(`/comment/${commentId}`)
-export const updateComment = (commentId, content) => api.put(`/comment/${commentId}`, {content})
+export const createComment = (postId, content) => unwrap(api.post(`/comment/${postId}`, {content}))
+export const getCommentsByPost = (postId) => unwrap(api.get(`/comment/${postId}`))
+export const deleteComment = (commentId) => unwrap(api.delete(`/comment/${commentId}`))
+export const updateComment = (commentId, content) => unwrap(api.put(`/comment/${commentId}`, {content}))
