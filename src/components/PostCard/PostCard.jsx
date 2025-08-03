@@ -5,7 +5,7 @@ import { toggleLike } from '../../api/like.api'
 import { createComment } from '../../api/comment.api'
 import './PostCard.css'
 
-const PostCard = ({ post = fakePost }) => {
+const PostCard = ({ post }) => {
   const [liked, setLiked] = useState(post.post_isLikedByCurrentUser)
   const [likesCount, setLikesCount] = useState(post.likeCount || 0)
   const [showComments, setShowComments] = useState(false)
