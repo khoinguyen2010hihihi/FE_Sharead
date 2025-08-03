@@ -5,22 +5,6 @@ import { toggleLike } from '../../api/like.api'
 import { createComment } from '../../api/comment.api'
 import './PostCard.css'
 
-const fakePost = {
-  _id: "686fd0f58d6f21723aca39b6",
-  author: {
-    _id: "686d0e0246c367dcb150bdee",
-    username: "Nguyen Ngoc Anh Hao",
-    avatar: "https://res.cloudinary.com/deyu8aoef/image/upload/v1752206607/kyouyuu/xal92m73eqbsf15glx9k.jpg"
-  },
-  content: "Cái websocket này khá thú vị nhỉ",
-  image: "https://res.cloudinary.com/deyu8aoef/image/upload/v1752158452/kyouyuu/larh8cy8w6wrcygfqtwr.png",
-  repostFrom: null,
-  createAt: "2025-07-10T14:40:53.806Z",
-  __v: 5,
-  likeCount: 6,
-  post_isLikedByCurrentUser: true
-}
-
 const PostCard = ({ post = fakePost }) => {
   const [liked, setLiked] = useState(post.post_isLikedByCurrentUser)
   const [likesCount, setLikesCount] = useState(post.likeCount || 0)

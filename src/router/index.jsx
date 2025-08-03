@@ -9,7 +9,6 @@ function AppRouter() {
       <Routes>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>      
-        <Route path="/test" element={<PostCard />}></Route>   
       </Routes>
     </BrowserRouter>
   )
