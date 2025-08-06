@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { FaHeart, FaRegHeart, FaComment } from 'react-icons/fa'
-import { getCommentsByPost } from '../../api/comment.api'
-import { toggleLike } from '../../api/like.api'
-import { createComment } from '../../api/comment.api'
+import { getCommentsByPost } from '../../services/api/comment.api.js'
+import { toggleLike } from '../../services/api/like.api.js'
+import { createComment } from '../../services/api/comment.api.js'
 import './PostCard.css'
 
 const PostCard = ({ post }) => {
