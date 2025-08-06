@@ -1,5 +1,5 @@
-import api from "../utils/axios"
-import { unwrap } from "../utils/unwrapper.js"
+import api from "../../utils/axios.js"
+import { unwrap } from "../../utils/unwrapper.js"
 
 export const getPosts = () => unwrap(api.get('/post'))
 export const createPost = (formData) =>
