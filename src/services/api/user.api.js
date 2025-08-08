@@ -1,5 +1,5 @@
-import api from "../utils/axios"
-import { unwrap } from "../utils/unwrapper.js"
+import api from "../../utils/axios.js"
+import { unwrap } from "../../utils/unwrapper.js"
 
 export const createUser = (data) => unwrap(api.post('/user/create', data))
 export const updateMe = (data) => unwrap(api.put('/user/updateMe', data))

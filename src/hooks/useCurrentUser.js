@@ -1,4 +1,4 @@
-import { useAuth } from "../context/useAuth.js"
+import { useAuth } from "./useAuth.js"
 const useCurrentUser = () => {
   const { currentUser } = useAuth()
   return currentUser

@@ -1,5 +1,5 @@
-import api from "../utils/axios"
-import { unwrap } from "../utils/unwrapper.js"
+import api from "../../utils/axios.js"
+import { unwrap } from "../../utils/unwrapper.js"
 
 export const createComment = (postId, content) => unwrap(api.post(`/comment/${postId}`, {content}))
 export const getCommentsByPost = (postId) => unwrap(api.get(`/comment/${postId}`))

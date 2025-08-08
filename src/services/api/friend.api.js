@@ -1,5 +1,5 @@
-import api from "../utils/axios"
-import { unwrap } from "../utils/unwrapper.js"
+import api from "../../utils/axios.js"
+import { unwrap } from "../../utils/unwrapper.js"
 
 export const sendFriendRequest = receiverId => unwrap(api.post(`/friend/send/${receiverId}`))
 export const acceptFriendRequest = requestId => unwrap(api.post(`/friend/accept/${requestId}`))

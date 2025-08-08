@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getCurrentUser } from '../services/api/user.api.js'
+import { getMe } from '../services/api/user.api.js'
 import { AuthContext } from './AuthContext.jsx'
 
 export const AuthProvider = ({ children }) => {
@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const user = await getCurrentUser()
+        const user = await getMe()
         setCurrentUser(user)
       } catch (err) {
         console.log(err)

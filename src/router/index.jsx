@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
 import PostCard from "../components/PostCard/PostCard"
+import HomePage from "../pages/HomePage"
 
 function AppRouter() {
   return (
@@ -9,7 +10,7 @@ function AppRouter() {
       <Routes>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>      
-        <Route path="/post/:postId" element={<PostCard />}></Route>
+        <Route path="/" element={<HomePage />}></Route>
       </Routes>
     </BrowserRouter>
   )

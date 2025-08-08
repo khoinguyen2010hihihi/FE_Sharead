@@ -1,50 +1,27 @@
 import { useState } from 'react'
-import { FaHeart, FaRegHeart, FaComment } from 'react-icons/fa'
-import { getCommentsByPost } from '../../services/api/comment.api.js'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { toggleLike } from '../../services/api/like.api.js'
-import { createComment } from '../../services/api/comment.api.js'
+import useCurrentUser from '../../hooks/useCurrentUser.js'
 import './PostCard.css'
 
-const PostCard = ({ post }) => {
-  const [liked, setLiked] = useState(post.post_isLikedByCurrentUser)
-  const [likesCount, setLikesCount] = useState(post.likeCount || 0)
-  const [showComments, setShowComments] = useState(false)
-  const [comments, setComments] = useState([])
-  const [newComment, setNewComment] = useState('')
+const PostCard = ({ post: originalPost }) => {
+  const [post, setPost] = useState(originalPost)
+  const currentUser = useCurrentUser()
 
   const handleToggleLike = async () => {
+    if (!currentUser) return
+
     try {
       await toggleLike(post._id)
-      setLiked(!liked)
-      setLikesCount(prev => liked ? prev - 1 : prev + 1)
+      setPost(prev => ({
+        ...prev,
+        post_isLikedByCurrentUser: !prev.post_isLikedByCurrentUser,
+        likeCount: prev.post_isLikedByCurrentUser
+          ? prev.likeCount - 1
+          : prev.likeCount + 1
+      }))
     } catch (error) {
-      console.log('Toggle like failed:', error)
-    }
-  }
-
-  const handleToggleComments = async () => {
-    setShowComments(prev => !prev)
-
-    if (!showComments) {
-      try {
-        const data = await getCommentsByPost(post._id)
-        setComments(data)
-      } catch (error) {
-        console.error('Failed to fetch comments:', error)
-      }
-    }
-  }
-
-  const handleCreateComment = async (e) => {
-    e.preventDefault()
-    if (!newComment.trim()) return
-
-    try {
-      const comment = await createComment(post._id, newComment)
-      setComments(prev => [comment, ...prev])
-      setNewComment('')
-    } catch (error) {
-      console.error('Failed to create comment:', error)
+      console.log('Fail to like',error)
     }
   }
 
@@ -61,35 +38,15 @@ const PostCard = ({ post }) => {
       </div>
 
       <div className="post-actions">
-        <button onClick={handleToggleLike}>
-          {liked ? <FaHeart color="red" /> : <FaRegHeart />} {likesCount}
+        <button onClick={handleToggleLike} className='like-btn'>
+          {post.post_isLikedByCurrentUser ? (
+            <FaHeart color="red" />
+          ) : (
+            <FaRegHeart />
+          )}
         </button>
-        <button onClick={handleToggleComments}>
-          <FaComment /> {comments.length}
-        </button>
+        <span>{post.likeCount} likes</span>
       </div>
-
-      {showComments && (
-        <div className="comments-section">
-          <form onSubmit={handleCreateComment} className="comment-form">
-            <input
-              type="text"
-              placeholder="Viết bình luận..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-            <button type="submit">Gửi</button>
-          </form>
-
-          <ul className="comment-list">
-            {comments.map(comment => (
-              <li key={comment._id}>
-                <strong>{comment.user.username}:</strong> {comment.content}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   )
 }
