@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
+import { useNavigate } from 'react-router-dom';
+import { register } from '../services/api/auth.api.js'; // import API
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // TODO: Gọi API register ở đây
+    try {
+      await register({ email, username, password }); // Gọi API register
+      navigate('/login'); // Chuyển sang login
+    } catch (err) {
+      setError(err.message || 'Register failed');
+    }
   };
 
   return (
     <div className="register-container">
       <div className="register-form">
-        <h2 className="register-title">Welcome Back</h2>
+        <h2 className="register-title">Create Account</h2>
+        {error && <p className="error-text">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="email" className="input-label">Email</label>
@@ -33,7 +40,7 @@ function RegisterPage() {
           </div>
 
           <div className="input-group">
-            <label htmlFor="text" className="input-label">Username</label>
+            <label htmlFor="username" className="input-label">Username</label>
             <input
               type="text"
               id="username"
