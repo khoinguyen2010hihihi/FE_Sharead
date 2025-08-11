@@ -9,14 +9,14 @@ function LoginPage() {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
-    // TODO: Gọi API login ở đây
+    
   };
 
   return (
     <div className="login-container">
       <img className='login__img' src="../../public/login_img.jpg" alt="" />
       <div className="login-form">
-        <h2 className="login-title">Welcome Back</h2>
+        <h2 className="login-title">Welcome To Sharead</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="email" className="input-label">Email</label>
