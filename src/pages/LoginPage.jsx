@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import './LoginPage.css';
+import { login } from '../services/api/auth.api.js';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    
+    try {
+      await login({ email, password })
+      navigate('/')
+    } catch (error) {
+      console.log(error.message || 'Login failed')
+    }
   };
 
   return (
