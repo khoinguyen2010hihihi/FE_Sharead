@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../services/api/auth.api.js'; // import API
+import { register } from '../services/api/auth.api.js';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -13,8 +13,8 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register({ email, username, password }); // Gọi API register
-      navigate('/login'); // Chuyển sang login
+      await register({ email, username, password });
+      navigate('/login');
     } catch (err) {
       setError(err.message || 'Register failed');
     }
