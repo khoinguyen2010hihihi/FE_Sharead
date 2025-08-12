@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './LoginPage.css';
-import { login } from '../services/api/auth.api.js';
+import './LoginPage.css'
+import { login } from '../services/api/auth.api.js'
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       await login({ email, password })
       navigate('/')
     } catch (error) {
       console.log(error.message || 'Login failed')
     }
-  };
+  }
 
   return (
     <div className="login-container">
@@ -57,7 +57,7 @@ function LoginPage() {
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default LoginPage;
+export default LoginPage
