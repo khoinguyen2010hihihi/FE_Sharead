@@ -1,7 +1,6 @@
 .home-page {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   max-width: 600px;
   margin: 32px auto 0;
   padding: 0 16px;
