@@ -1,87 +1,114 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./CommentBox.css";
+import React from 'react'
+import { useEffect, useState } from 'react'
+import './CommentBox.css'
+import { createComment, getCommentsByPost, deleteComment, updateComment } from '../../services/api/comment.api'
+import { toggleCommentLike } from '../../services/api/comment-like.api'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
-const CommentBox = ({ postId, currentUser }) => {
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-  const [loading, setLoading] = useState(false);
+export default function CommentBox({ postId }) {
+  const [comments, setComments] = useState([])
+  const [newComment, setNewComment] = useState('')
+  const currentUser = useCurrentUser()
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const res = await axios.get(`http://localhost:2010/comment/${postId}`, {
-          withCredentials: true,
-        });
-        setComments(res.data.metadata || []);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-      }
-    };
-
-    if (postId) {
-      fetchComments();
+  const fetchComments = async () => {
+    try {
+      const data = await getCommentsByPost(postId)
+      setComments(data)
+    } catch (error) {
+      console.error("Failed to fetch comments:", error)
     }
-  }, [postId]);
+  }
 
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    if (!newComment.trim()) return;
+  const handleCommentSubmit = async () => {
+    if (!newComment) return
 
     try {
-      setLoading(true);
-      const res = await axios.post(
-        `http://localhost:2010/comment/${postId}`,
-        { content: newComment },
-        { withCredentials: true }
-      );
-
-      setComments([res.data.metadata, ...comments]);
-      setNewComment("");
+      const createdComment = await createComment(postId, newComment)
+      setComments([...comments, createdComment])
+      setNewComment('')
+      fetchComments()
     } catch (error) {
-      console.error("Error submitting comment:", error);
-    } finally {
-      setLoading(false);
+      console.error("Failed to create comment:", error)
     }
-  };
+  }
+
+  const handleUpdateComment = async (commentId, content) => {
+    if (!content) return
+
+    const updatedContent = prompt("Sửa comment:", content)
+    if (updatedContent !== null && updatedContent.trim()) {
+      try {
+        await updateComment(commentId, updatedContent)
+        fetchComments()
+      } catch (error) {
+        console.error("Failed to update comment:", error)
+      }
+    }
+  }
+
+  const handleCommentDelete = async (commentId) => {
+    try {
+      await deleteComment(commentId)
+      fetchComments();
+    } catch (error) {
+      console.error("Failed to delete comment:", error)
+    }
+  }
+
+  const handleCommentLike = async (commentId) => {
+    try {
+      await toggleCommentLike(commentId);
+      fetchComments();
+    } catch (err) {
+      console.error("Failed to like/unlike comment:", err);
+    }
+  }
+
+  const formatDate = (isoDate) => {
+    return new Date(isoDate).toLocaleString("vi-VN", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit" });
+  }
+
+  useEffect(() => {
+    fetchComments();
+  }, [postId])
 
   return (
-    <div className="comment-box">
-      <form onSubmit={handleCommentSubmit} className="comment-form">
+    <div className='comment-box'>
+      <div className="comment-input">
         <input
           type="text"
-          placeholder="Viết bình luận..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          disabled={loading}
+          placeholder="Viết comment..."
         />
-        <button type="submit" disabled={loading || !newComment.trim()}>
-          Gửi
-        </button>
-      </form>
+        <button onClick={handleCommentSubmit}>Gửi</button>
+      </div>
 
-      <ul className="comment-list">
+      <div className="comment-list">
         {comments.map((comment) => (
-          <li key={comment._id} className="comment-item">
-            <img
-              src={comment.user.avatar}
-              alt={comment.user.username}
-              className="comment-avatar"
-            />
-            <div className="comment-content">
-              <div className="comment-user">{comment.user.username}</div>
-              <div className="comment-text">{comment.content}</div>
-              <div className="comment-meta">
-                <span>{new Date(comment.createdAt).toLocaleString()}</span>
-                <span>👍 {comment.likeCount}</span>
-                {/* Bạn có thể thêm nút like nếu muốn ở đây */}
-              </div>
+          <div key={comment._id} className="comment-item">
+            <div>
+              <strong>{comment.user.username}</strong>
+              <span className='comment-time'>{formatDate(comment.createdAt)}</span>
             </div>
-          </li>
+            <p>{comment.content}</p>
+            <div className="comment-actions">
+              <button
+                className={comment.isLikedByCurrentUser ? "liked" : ""}
+                onClick={() => handleCommentLike(comment._id)}
+              >
+                👍 {comment.likeCount}
+              </button>
+              {currentUser._id === comment.user._id && (
+                <>
+                  <button onClick={() => handleUpdateComment(comment._id, comment.content)}>Sửa</button>
+                  <button onClick={() => handleCommentDelete(comment._id)}>Xóa</button>
+                </>
+              )}
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
-  );
-};
-
-export default CommentBox;
+  )
+}
