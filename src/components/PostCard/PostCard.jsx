@@ -12,7 +12,7 @@ const PostCard = ({ post: originalPost }) => {
     if (!currentUser) return
 
     try {
-      await toggleLike(post._id)
+      await toggleLike(post._id) 
       setPost(prev => ({
         ...prev,
         post_isLikedByCurrentUser: !prev.post_isLikedByCurrentUser,

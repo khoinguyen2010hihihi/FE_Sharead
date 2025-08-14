@@ -42,6 +42,8 @@ export default function PostCreate({ onPostSuccess }) {
     <div className="post-create">
       <form onSubmit={handleSubmit}>
         <textarea
+          cols={30}
+          rows={3}
           placeholder="Có gì hot?"
           value={content}
           onChange={(e) => setContent(e.target.value)}
