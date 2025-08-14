@@ -6,19 +6,19 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await getMe()
-        setCurrentUser(user)
-      } catch (err) {
-        console.log(err)
-        setCurrentUser(null)
-      } finally {
-        setLoading(false)
-      }
+  const fetchUser = async () => {
+    try {
+      const user = await getMe()
+      setCurrentUser(user)
+    } catch (err) {
+      console.log(err)
+      setCurrentUser(null)
+    } finally {
+      setLoading(false)
     }
+  }
 
+  useEffect(() => {
     fetchUser()
   }, [])
 
