@@ -38,15 +38,18 @@ const PostCard = ({ post: originalPost }) => {
       </div>
 
       <div className="post-actions">
-        <button onClick={handleToggleLike} className='like-btn'>
-          {post.post_isLikedByCurrentUser ? (
-            <FaHeart color="red" />
-          ) : (
-            <FaRegHeart />
-          )}
-        </button>
-        <span>{post.likeCount} likes</span>
+        <div className="like-wrapper">
+          <button onClick={handleToggleLike} className="like-btn">
+            {post.post_isLikedByCurrentUser ? (
+              <FaHeart color="red" />
+            ) : (
+              <FaRegHeart />
+            )}
+          </button>
+          <span className="like-cnt">{post.likeCount}</span>
+        </div>
       </div>
+
     </div>
   )
 }

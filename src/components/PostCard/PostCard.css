@@ -72,3 +72,19 @@
   height: 30px;
   border-radius: 50%;
 }
+
+.like-btn {
+  padding: 0.6rem 0.9rem;
+}
+
+.like-cnt {
+  display: grid;
+  place-items: center;
+  font-size: medium;
+}
+
+.like-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

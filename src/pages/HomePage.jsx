@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getPosts } from "../services/api/post.api.js"
 import PostCard from "../components/PostCard/PostCard"
 import PostCreate from "../components/PostCreate/PostCreate"
+import CommentBox from "../components/CommentBox/CommentBox"
 import useCurrentUser from "../hooks/useCurrentUser.js"
 import './HomePage.css'
 

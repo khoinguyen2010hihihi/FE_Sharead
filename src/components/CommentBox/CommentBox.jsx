@@ -1,9 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import './CommentBox.css'
 import { createComment, getCommentsByPost, deleteComment, updateComment } from '../../services/api/comment.api'
 import { toggleCommentLike } from '../../services/api/comment-like.api'
 import useCurrentUser from '../../hooks/useCurrentUser'
+import './CommentBox.css'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 
 export default function CommentBox({ postId }) {
   const [comments, setComments] = useState([])
@@ -97,7 +98,7 @@ export default function CommentBox({ postId }) {
                 className={comment.isLikedByCurrentUser ? "liked" : ""}
                 onClick={() => handleCommentLike(comment._id)}
               >
-                👍 {comment.likeCount}
+                {comment.isLikedByCurrentUser ? <FaHeart /> : <FaRegHeart />} {comment.likeCount}
               </button>
               {currentUser._id === comment.user._id && (
                 <>
