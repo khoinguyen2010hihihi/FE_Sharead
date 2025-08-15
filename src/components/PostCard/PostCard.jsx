@@ -2,10 +2,13 @@ import { useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { toggleLike } from '../../services/api/like.api.js'
 import useCurrentUser from '../../hooks/useCurrentUser.js'
+import CommentBox from '../CommentBox/CommentBox.jsx'
+import { MdCancel } from "react-icons/md";
 import './PostCard.css'
 
 const PostCard = ({ post: originalPost }) => {
   const [post, setPost] = useState(originalPost)
+  const [isCommentOpen, setIsCommentOpen] = useState(false)
   const currentUser = useCurrentUser()
 
   const handleToggleLike = async () => {
@@ -25,6 +28,10 @@ const PostCard = ({ post: originalPost }) => {
     }
   }
 
+  const handleToggleComment = () => {
+    setIsCommentOpen(prev => !prev)
+  }
+
   return (
     <div className="post-card">
       <div className="post-header">
@@ -38,6 +45,8 @@ const PostCard = ({ post: originalPost }) => {
       </div>
 
       <div className="post-actions">
+
+        {/****** LIKE BUTTON *******/}
         <div className="like-wrapper">
           <button onClick={handleToggleLike} className="like-btn">
             {post.post_isLikedByCurrentUser ? (
@@ -48,8 +57,24 @@ const PostCard = ({ post: originalPost }) => {
           </button>
           <span className="like-cnt">{post.likeCount}</span>
         </div>
+        {/* ---------------------- */}
+
+
+        {/****** COMMENT BUTTON *******/}
+        <div className="comment-wrapper">
+          <button onClick={handleToggleComment} className='comment-btn'>Bình luận</button>
+        </div>
+        {/* ------------------------- */}
       </div>
 
+      {isCommentOpen && (
+        <div className="comment-modal">
+          <div className="comment-modal-content">
+            <button className='close-btn' onClick={handleToggleComment}><MdCancel /></button>
+            <CommentBox postId={post._id} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
