@@ -3,7 +3,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { toggleLike } from '../../services/api/like.api.js'
 import useCurrentUser from '../../hooks/useCurrentUser.js'
 import CommentBox from '../CommentBox/CommentBox.jsx'
-import { MdCancel } from "react-icons/md";
+import { IoCloseOutline } from "react-icons/io5";
 import './PostCard.css'
 
 const PostCard = ({ post: originalPost }) => {
@@ -70,7 +70,7 @@ const PostCard = ({ post: originalPost }) => {
       {isCommentOpen && (
         <div className="comment-modal">
           <div className="comment-modal-content">
-            <button className='close-btn' onClick={handleToggleComment}><MdCancel /></button>
+            <button className='close-btn' onClick={handleToggleComment}><IoCloseOutline /></button>
             <CommentBox postId={post._id} />
           </div>
         </div>
