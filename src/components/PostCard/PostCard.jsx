@@ -24,7 +24,7 @@ const PostCard = ({ post: originalPost }) => {
           : prev.likeCount + 1
       }))
     } catch (error) {
-      console.log('Fail to like',error)
+      console.log('Fail to like', error)
     }
   }
 
@@ -45,28 +45,49 @@ const PostCard = ({ post: originalPost }) => {
       </div>
 
       <div className="post-actions">
-
-        {/****** LIKE BUTTON *******/}
+        {/* LIKE */}
         <div className="like-wrapper">
           <button onClick={handleToggleLike} className="like-btn">
             {post.post_isLikedByCurrentUser ? (<FaHeart color="red" />) : (<FaRegHeart />)}
           </button>
           <span className="like-cnt">{post.likeCount}</span>
         </div>
-        {/* ---------------------- */}
 
-
-        {/****** COMMENT BUTTON *******/}
+        {/* COMMENT */}
         <div className="comment-wrapper">
           <button onClick={handleToggleComment} className='comment-btn'>Bình luận</button>
         </div>
-        {/* ------------------------- */}
       </div>
 
+      {/* MODAL COMMENT */}
       {isCommentOpen && (
         <div className="comment-modal">
           <div className="comment-modal-content">
-            <button className='close-btn' onClick={handleToggleComment}><IoCloseOutline /></button>
+            <button className='close-btn' onClick={handleToggleComment}>
+              <IoCloseOutline />
+            </button>
+
+            {/* POST GỐC */}
+            <div className="modal-post">
+              <div className="post-header">
+                <img src={post.author.avatar} alt="avatar" className="avatar" />
+                <span className="username">{post.author.username}</span>
+              </div>
+              <div className="post-content">
+                <p>{post.content}</p>
+                {post.image && <img src={post.image} alt="post" className="post-image" />}
+              </div>
+              <div className="post-actions">
+                <div className="like-wrapper">
+                  <button onClick={handleToggleLike} className="like-btn">
+                    {post.post_isLikedByCurrentUser ? (<FaHeart color="red" />) : (<FaRegHeart />)}
+                  </button>
+                  <span className="like-cnt">{post.likeCount}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* COMMENT BOX */}
             <CommentBox postId={post._id} />
           </div>
         </div>
