@@ -49,11 +49,7 @@ const PostCard = ({ post: originalPost }) => {
         {/****** LIKE BUTTON *******/}
         <div className="like-wrapper">
           <button onClick={handleToggleLike} className="like-btn">
-            {post.post_isLikedByCurrentUser ? (
-              <FaHeart color="red" />
-            ) : (
-              <FaRegHeart />
-            )}
+            {post.post_isLikedByCurrentUser ? (<FaHeart color="red" />) : (<FaRegHeart />)}
           </button>
           <span className="like-cnt">{post.likeCount}</span>
         </div>

@@ -98,7 +98,7 @@ export default function CommentBox({ postId }) {
                 className={comment.isLikedByCurrentUser ? "liked" : ""}
                 onClick={() => handleCommentLike(comment._id)}
               >
-                {comment.isLikedByCurrentUser ? <FaHeart /> : <FaRegHeart />} {comment.likeCount}
+                {comment.comment_isLikedByCurrentUser ? <FaHeart color='red' /> : <FaRegHeart />} {comment.likeCount}
               </button>
               {currentUser._id === comment.user._id && (
                 <>
