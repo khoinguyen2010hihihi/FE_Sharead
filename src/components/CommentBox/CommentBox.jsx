@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createComment, getCommentsByPost, deleteComment, updateComment } from '../../services/api/comment.api'
 import { toggleCommentLike } from '../../services/api/comment-like.api'
 import useCurrentUser from '../../hooks/useCurrentUser'
@@ -9,6 +8,8 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa'
 export default function CommentBox({ postId }) {
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState('')
+  const [editingCommentId, setEditingCommentId] = useState(null)
+  const [editedContent, setEditedContent] = useState('')
   const currentUser = useCurrentUser()
 
   const fetchComments = async () => {
@@ -21,10 +22,10 @@ export default function CommentBox({ postId }) {
   }
 
   const handleCommentSubmit = async () => {
-    if (!newComment) return
+    if (!newComment.trim()) return
 
     try {
-      const createdComment = await createComment(postId, newComment)
+      const createdComment = await createComment(postId, newComment.trim())
       setComments([...comments, createdComment])
       setNewComment('')
       fetchComments()
@@ -33,18 +34,27 @@ export default function CommentBox({ postId }) {
     }
   }
 
-  const handleUpdateComment = async (commentId, content) => {
-    if (!content) return
+  const handleUpdateComment = async (commentId) => {
+    if (!editedContent.trim()) return
 
-    const updatedContent = prompt("Sửa comment:", content)
-    if (updatedContent !== null && updatedContent.trim()) {
-      try {
-        await updateComment(commentId, updatedContent)
-        fetchComments()
-      } catch (error) {
-        console.error("Failed to update comment:", error)
-      }
+    try {
+      await updateComment(commentId, editedContent.trim())
+      setEditingCommentId(null)
+      setEditedContent('')
+      fetchComments()
+    } catch (error) {
+      console.error("Failed to update comment:", error)
     }
+  }
+
+  const cancelEditing = () => {
+    setEditingCommentId(null)
+    setEditedContent('')
+  }
+
+  const startEditing = (comment) => {
+    setEditingCommentId(comment._id)
+    setEditedContent(comment.content)
   }
 
   const handleCommentDelete = async (commentId) => {
@@ -66,7 +76,12 @@ export default function CommentBox({ postId }) {
   }
 
   const formatDate = (isoDate) => {
-    return new Date(isoDate).toLocaleString("vi-VN", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit" });
+    return new Date(isoDate).toLocaleString("vi-VN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      day: "2-digit",
+      month: "2-digit"
+    });
   }
 
   useEffect(() => {
@@ -76,11 +91,13 @@ export default function CommentBox({ postId }) {
   return (
     <div className='comment-box'>
       <div className="comment-input">
-        <input
+        <textarea
           type="text"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Viết comment..."
+          cols="30"
+          rows="2"
         />
         <button onClick={handleCommentSubmit}>Gửi</button>
       </div>
@@ -88,11 +105,31 @@ export default function CommentBox({ postId }) {
       <div className="comment-list">
         {comments.map((comment) => (
           <div key={comment._id} className="comment-item">
-            <div>
-              <strong>{comment.user.username}</strong>
-              <span className='comment-time'>{formatDate(comment.createdAt)}</span>
+            <div className="comment-box">
+              <div className="comment-wrapper">
+                <div className="avatar-username">
+                  <img src={comment.user.avatar} alt="avatar" className='avatar' />
+                  <strong>{comment.user.username}</strong>
+                </div>
+                <span className='comment-time'>{formatDate(comment.createdAt)}</span>
+              </div>
+
+              {editingCommentId === comment._id ? (
+                <input
+                  value={editedContent}
+                  onChange={(e) => setEditedContent(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleUpdateComment(comment._id)
+                    if (e.key === 'Escape') cancelEditing()
+                  }}
+                  className="edit-comment-input"
+                  autoFocus
+                />
+              ) : (
+                <p className='comment-content'>{comment.content}</p>
+              )}
             </div>
-            <p>{comment.content}</p>
+
             <div className="comment-actions">
               <button
                 className={comment.isLikedByCurrentUser ? "liked" : ""}
@@ -100,11 +137,19 @@ export default function CommentBox({ postId }) {
               >
                 {comment.comment_isLikedByCurrentUser ? <FaHeart color='red' /> : <FaRegHeart />} {comment.likeCount}
               </button>
+
               {currentUser._id === comment.user._id && (
-                <>
-                  <button onClick={() => handleUpdateComment(comment._id, comment.content)}>Sửa</button>
-                  <button onClick={() => handleCommentDelete(comment._id)}>Xóa</button>
-                </>
+                editingCommentId === comment._id ? (
+                  <>
+                    <button onClick={() => handleUpdateComment(comment._id)}>Lưu</button>
+                    <button onClick={cancelEditing}>Hủy</button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={() => startEditing(comment)}>Sửa</button>
+                    <button onClick={() => handleCommentDelete(comment._id)}>Xóa</button>
+                  </>
+                )
               )}
             </div>
           </div>
