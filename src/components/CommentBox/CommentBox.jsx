@@ -97,7 +97,8 @@ export default function CommentBox({ postId }) {
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Viết comment..."
           cols="30"
-          rows="2"
+          rows="3"
+          className='comment-input'
         />
         <button onClick={handleCommentSubmit}>Gửi</button>
       </div>
