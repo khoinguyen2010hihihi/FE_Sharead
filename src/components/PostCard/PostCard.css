@@ -75,6 +75,13 @@
 
 .like-btn {
   padding: 0.6rem 0.9rem;
+  border: solid #000 0px;
+  transition: background 0.2s ease;
+}
+
+.like-btn:hover {
+  background: #c7c6c6;
+  border: solid #000 0px;
 }
 
 .like-cnt {
@@ -90,12 +97,14 @@
 }
 
 .comment-btn {
-  margin-left: 10px;
-  background-color: #eee;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
+  padding: 0.6rem 0.9rem;
+  border: solid #000 0px;
+  transition: background 0.2s ease;
+}
+
+.comment-btn:hover {
+  background: #c7c6c6;
+  border: solid #000 0px;
 }
 
 .comment-modal {
@@ -158,4 +167,20 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
+}
+
+.repost-wrapper {
+  margin-top: 8px;
+}
+
+.original-post-card {
+  background: #f0f2f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.share-btn {
+  padding: 0.6rem 0.9rem;
+  transition: background 0.2s ease;
 }
