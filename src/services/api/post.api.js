@@ -8,3 +8,4 @@ export const createPost = (formData) =>
   }))
 export const getPostById = (postId) => unwrap(api.get(`/post/${postId}`))
 export const repostPost = (postId) => unwrap(api.post(`/post/${postId}/repost`))
+export const getPostByUserId = (userId) => unwrap(api.get(`/post/user/${userId}`))

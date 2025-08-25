@@ -13,7 +13,6 @@ export const updateAvatar = (file) => {
 export const getMe = () => unwrap(api.get('/user/profile/me'))
 export const getAllUsers = () => unwrap(api.get('/user/getAll'))
 export const searchUsers = (q) => unwrap(api.get(`/user/search?q=${q}`))
-export const getUserProfile = (id) => unwrap(api.get(`/user/profile/${id}`))
 export const getUserById = (id) => unwrap(api.get(`/user/${id}`))
 export const updateUser = (id, data) => unwrap(api.put(`/user/${id}`, data))
 export const deleteUser = (id) => unwrap(api.delete(`/user/${id}`))

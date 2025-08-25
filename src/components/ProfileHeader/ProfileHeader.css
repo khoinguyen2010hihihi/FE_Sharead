@@ -1,0 +1,190 @@
+.profile-header {
+  background: linear-gradient(135deg, #ff00f7 0%, #00ff55 100%);
+  color: white;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.15);
+  position: relative;
+  overflow: hidden;
+  margin-top: 50px;
+}
+
+.friend-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.profile-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.profile-avatar {
+  margin-top: 40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.avatar-upload {
+  position: absolute;
+  bottom: -8px;
+  right: 50%;
+  transform: translateX(50%);
+  background: #667eea;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.avatar-upload:hover {
+  background: #5a67d8;
+  transform: translateX(50%) translateY(-2px);
+  box-shadow: 0 4px 16px rgba(90, 103, 216, 0.4);
+}
+
+.username {
+  /* font-size: 28px; */
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+.bio {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0 0 15px 0;
+  opacity: 0.9;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.friend-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  margin: 0 8px 8px 0;
+  display: inline-block;
+}
+
+.friend-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.friend-btn.accept {
+  background: rgba(52, 211, 153, 0.9);
+  border-color: rgba(52, 211, 153, 0.6);
+}
+
+.friend-btn.accept:hover {
+  background: rgba(16, 185, 129, 1);
+  border-color: rgba(16, 185, 129, 0.8);
+}
+
+.friend-btn.reject {
+  background: rgba(248, 113, 113, 0.9);
+  border-color: rgba(248, 113, 113, 0.6);
+}
+
+.friend-btn.reject:hover {
+  background: rgba(239, 68, 68, 1);
+  border-color: rgba(239, 68, 68, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-header {
+    padding: 32px 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  
+  .bio {
+    font-size: 14px;
+  }
+  
+  .friend-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    margin: 0 4px 8px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-header {
+    padding: 24px 16px;
+  }
+  
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .username {
+    font-size: 20px;
+  }
+  
+  .friend-btn {
+    width: 100%;
+    margin: 0 0 8px 0;
+  }
+}
